@@ -110,7 +110,7 @@ export default function Noticias(){
 		}
 	  ).catch(
 		error=>{
-		  //setData2(data);
+		  //setData2(data);;
 		  //console.log(error);
 		}
 	  )

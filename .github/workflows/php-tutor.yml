@@ -15,7 +15,7 @@ jobs:
       - uses: actions/checkout@v2
       - name: Build Docker images
         run: |
-          docker build -t ghcr.io/vicovillca/proyectoobi/backend-tutor -f back_end/Admin/Dockerfile back_end/Tutor/
+          docker build -t ghcr.io/vicovillca/proyectoobi/backend-tutor -f back_end/Tutor/Dockerfile back_end/Tutor/
       - name: Push Docker images to registry
         run: |
           docker push ghcr.io/vicovillca/proyectoobi/backend-tutor
