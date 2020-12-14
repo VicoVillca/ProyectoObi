@@ -6,13 +6,16 @@ jobs:
   github-package:
     runs-on: ubuntu-latest
     steps:
-    - name: Push to GitHub Packages Admin
-      uses: docker/build-push-action@v1
-      with:
+      - name: Login to Registry
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
           username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-          dockerfile: ./back_end/Admin/Dockerfile
-	  context: ./back_end/Admin/
-          registry: docker.pkg.github.com
-          repository: vicovillca/proyectoobi/backend-admin
-          tag_with_ref: true
+          password: ${{ secrets.PAT_GHCR }}
+      - uses: actions/checkout@v2
+      - name: Build Docker images
+        run: |
+          docker build -t ghcr.io/vicovillca/proyectoobi/backend-admin -f back_end/Admin/Dockerfile back_end/Admin/
+      - name: Push Docker images to registry
+        run: |
+          docker push ghcr.io/vicovillca/proyectoobi/backend-admin

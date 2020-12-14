@@ -37,7 +37,7 @@ const cookies = new Cookies();
 const header = HOST.header(cookies.get('token'));
 
 const content = [
-    {
+    /*{
 		title: 'Vulputate Mollis Ultricies',
 		description:
 			'Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh.',
@@ -90,7 +90,7 @@ const content = [
 		image: 'https://i.imgur.com/DvmN8Hx.jpg',
 		user: 'Katerina',
 		userProfile: 'https://s7.postimg.cc/hsk2th5tn/6_3x.png',
-	},
+	},*/
   ];
 
   
@@ -126,6 +126,8 @@ export default function Noticias(){
         <div>
             <GridContainer>
                 <GridItem xs={12} sm={9} md={9} >
+					{(content.length===0)?'':
+
 					<Slider  autoplay={3000} >
 						{content.map((item, index) => (
 							<div
@@ -147,18 +149,18 @@ export default function Noticias(){
 							</div>
 						))}
 					</Slider>
+					}
 					{data.map(console =>(
 						<GridItem key={console.idnoticia}>
 							<Card>
 								<CardBody>
-								<ReactMarkdown>{"# "+console.titulo+"\n## "+console.subtitulo+"\n"+console.contenido}</ReactMarkdown>
-								</CardBody>
-								<CardFooter stats>
+									<ReactMarkdown>{"# "+console.titulo+"\n## "+console.subtitulo+"\n"+console.contenido}</ReactMarkdown>
+									
 									<div className={classes.stats}>
 										<Update />
 										 ADMIN:{console.fecha}
 									</div>
-								</CardFooter>
+								</CardBody>
 							</Card>
 						</GridItem>
 					))}
