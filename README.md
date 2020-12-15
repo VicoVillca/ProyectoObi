@@ -31,7 +31,7 @@ y React en el Fron-end.
     CREATE DATABASE ioidb;
     ```
   - Creamos las tablas e inserts nesesarios
-    **ProyectoObi/Documentacion_Scrum/BasedeDatosIOI.sql**
+    **ProyectoObi/back_end/BasedeDatosIOI.sql**
 
 ## Iniciamos el Back-end
 Nuestro lado Back-end esta en tornoa  php para lo cual solo iniciamos el servidor
