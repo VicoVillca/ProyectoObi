@@ -1,3 +1,5 @@
+ 
+ 
 name: CI/CD
 on:
   push:
@@ -30,28 +32,40 @@ jobs:
 
     - name: Build
       run: (cd front_end/proyecto-obi && npm run build)
-    
+      
     - name: Uploading artifact 
       uses: actions/upload-artifact@v2
       with:
         name: Artifact
-        path: front_end/proyecto-obi/build/ 
+        path: front_end/proyecto-obi/build
   
   github-package:
     needs: build
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - uses: actions/download-artifact@master
-      with:       
-        name: Artifact
-        path: front_end/proyecto-obi/build/
-    - name: Push to GitHub Packages
-      uses: docker/build-push-action@v1
-      with:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      
+      - name: Download math result for job 1
+        uses: actions/download-artifact@v2
+        with:
+          name: Artifact
+          path: build/
+          
+      - name: Build
+        run: pwd && ls -lha ./build 
+      - name: Build
+        run: pwd && ls -lha
+        
+      - name: Login to Registry
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
           username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-          dockerfile: ./front_end/proyecto-obi/build/Dockerfile
-          registry: docker.pkg.github.com
-          repository: vicovillca/proyectoobi/front-end
-          tag_with_ref: true
+          password: ${{ secrets.PAT_GHCR }}
+      - name: Build Docker images
+        run: |
+          docker build -t ghcr.io/vicovillca/proyectoobi/front_end -f ./front_end/proyecto-obi/Dockerfile .
+      - name: Push Docker images to registry
+        run: |
+          docker push ghcr.io/vicovillca/proyectoobi/front_end
