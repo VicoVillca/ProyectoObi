@@ -63,4 +63,5 @@ que instalar sus respectivos componentes.
 
 
    [obi url]: <https://olimpiada.icpc-bolivia.edu.bo/>
+Realizando modificaciones...
    
